@@ -98,6 +98,24 @@ vows.describe(RULE).addBatch({
             errors = coffeelint.lint(source, config)
             assert.isEmpty(errors)
 
+    'Should not complain about strings':
+        topic:
+            '''
+            foo = (stuff) ->
+              throw new Error("Error: stuff required") unless stuff?
+              # do real work
+            '''
+
+        'will return an error': (source) ->
+            config =
+                colon_assignment_spacing:
+                    level: 'error'
+                    spacing:
+                        left: 1
+                        right: 1
+            errors = coffeelint.lint(source, config)
+            assert.isEmpty(errors)
+
     'Should not complain about CSX syntax':
         topic:
             '''

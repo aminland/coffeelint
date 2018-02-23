@@ -56,7 +56,7 @@ module.exports = class LexicalLinter extends BaseLinter
         # error for the same token.
         errors = []
         for rule in @rules when token[0] in rule.tokens
-            v = @normalizeResult rule, rule.lintToken(token, @tokenApi), token: token
+            v = @normalizeResult rule, rule.lintToken(token, @tokenApi)
             errors.push v if v?
         errors
 

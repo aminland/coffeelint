@@ -54,7 +54,6 @@ task 'prepublish', 'Prepublish', ->
     delete packageJson.dependencies.browserify
     delete packageJson.dependencies.coffeeify
     delete packageJson.scripts.install
-    delete packageJson.scripts.prepare
 
     fs.writeFileSync 'package.json', JSON.stringify(packageJson, undefined, 2)
 
@@ -63,8 +62,8 @@ task 'prepublish', 'Prepublish', ->
 task 'postpublish', 'Postpublish', ->
     # Revert the package.json back to it's original state
     exec 'git checkout ./package.json', (err) ->
-        if err
-            console.error('Error reverting package.json: ' + err)
+      if err
+        console.error('Error reverting package.json: ' + err)
 
 task 'publish', 'publish', ->
     copySync '.package.json', 'package.json'
